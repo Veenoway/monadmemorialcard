@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monad Badge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="index.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="height: 100vh;">
+            <div class="col-md-3 col-sm-12 bg-blue">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <h4 class="text-white weight-700 text-28 font-park">Log in</h4>
+                        </div>
+                        <div class="col-12 my-2 text-start">
+                            <button id="connectMetamask" class="btn btn-outline-primary bg-light-blue text-black font-park weight-700">
+                                Login with Metamask
+                            </button>
+                        </div>
+                        <div class="col-12 my-1 text-start ">
+                            <p class="text-white text-justify">Wallet Address : </p>
+                            <p id="walletAddress" class="text-white text-justify"></p>
+                            <p id="status" class="text-white" style="margin-top: 10px; font-weight: bold;">Status: Not Connected</p>
+                        </div>
+                        <div class="col-12 text-start my-1">
+                            <span class="text-white weight-700 text-20 font-park mt-3">Card Remained</span>
+                        </div>
+                        <div class="col-12 text-start">
+                            <div class="spinner-border spinner-border-sm text-white" id="loadSpinRemined" role="status">
+                            </div>
+                            <span id="remainText" class="text-white weight-700 text-20 font-park mt-3"></span>
+                        </div>
+                        <div class="col-12 text-start">
+                            <hr class="text-white"/>
+                            <h5 class="text-white weight-700 text-28 font-park mt-3">Contributions</h5>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-4 col-sm-12 bg-purple text-center">
+                <div class="container-fluid text-start text-white text-20 font-park mt-5">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12">Network :</div>
+                        <div class="col-md-9 col-sm-12">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-boxes" viewBox="0 0 16 16">
+                                        <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434zM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567zM7.5 9.933l-2.75 1.571v3.134l2.75-1.571zm1 3.134 2.75 1.571v-3.134L8.5 9.933zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567zm2.242-2.433V3.504L8.5 5.076V8.21zM7.5 8.21V5.076L4.75 3.504v3.134zM5.258 2.643 8 4.21l2.742-1.567L8 1.076zM15 9.933l-2.75 1.571v3.134L15 13.067zM3.75 14.638v-3.134L1 9.933v3.134z"/>
+                                      </svg>
+                                </span>
+                                <input type="text" class="form-control border border-1" placeholder="Monad" aria-describedby="basic-addon1" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12">Name :</div>
+                        <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control border border-1" value="Memorial NFT Card" aria-describedby="basic-addon1" disabled>
+                        </div>
+                    </div>
+                   
+                    <div class="row mt-4 text-justify">
+                        <div class="col-12 ">
+                            <button class="btn btn-success btn-lg" id="mintButton" onclick="mintFunction();">
+                                <div class="spinner-border spinner-border-sm text-white" id="loadSpin" role="status" style="display: none;">
+                                </div>
+                                Mint
+                            </button>
+                            <p id="statusMint" class="text-white"></p>
+                        </div>
+                    </div>
+                </div>
+               
+
+            </div>
+            <div class="col-md-5 col-sm-12 ">
+                <model-viewer id="reveal" 
+                            class="w-100" 
+                            loading="eager" 
+                            camera-controls 
+                            touch-action="pan-y" 
+                            auto-rotate 
+                            tone-mapping="aces" 
+                            src="./models/card.glb" 
+                            shadow-intensity="1" 
+                            alt="A 3D model of a shishkebab" 
+                            style="height: 100vh; max-height: 100vh;">
+                </model-viewer>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+
+
+</html>
+
+
+
+<script>
+console.log(typeof ethers); 
+        //Variables
+        const contractAddress = "0xBEA7642e2FFF8637a6a4152b8338EecE8178eE30";
+
+        const contractABI = [
+    {
+        "inputs": [
+            { "internalType": "address", "name": "recipient", "type": "address" },
+            { "internalType": "string", "name": "tokenURI", "type": "string" },
+            { "internalType": "string", "name": "providedSecret", "type": "string" }
+        ],
+        "name": "mint",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "nextTokenId",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+];
+
+
+        let isConnected = false;
+        const connectButton = document.getElementById("connectMetamask");
+        const walletAddressElement = document.getElementById("walletAddress");
+        const statusElement = document.getElementById("status");
+        const remainText = document.getElementById("remainText");
+        
+        const statusMint = document.getElementById("statusMint");
+        const mintButton = document.getElementById("mintButton");
+        const loadSpin = document.getElementById("loadSpin");
+        const loadSpinRemined = document.getElementById("loadSpinRemined");
+
+
+        async function connectMetamask() {
+            if (typeof window.ethereum !== "undefined") {
+                try {
+                  
+                    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                    const account = accounts[0]; 
+                    walletAddressElement.innerText = ` ${account}`;
+                    statusElement.innerText = "Status: Connected";
+                    connectButton.innerText = "Disconnect MetaMask";
+                    isConnected = true;
+                } catch (error) {
+                    console.error("User denied account access or error occurred:", error);
+                    walletAddressElement.innerText = "Connection failed!";
+                    statusElement.innerText = "Status: Not Connected";
+                }
+            } else {
+                alert("MetaMask is not installed. Please install it to connect.");
+            }
+        }
+
+        
+        window.ethereum.on("accountsChanged", (accounts) => {
+            if (accounts.length === 0) {
+                walletAddressElement.innerText = "Please connect to MetaMask.";
+            } else {
+                walletAddressElement.innerText = ` ${accounts[0]}`;
+                console.log("Account changed:", accounts[0]);
+            }
+        });
+
+      
+        window.ethereum.on("chainChanged", (chainId) => {
+            statusElement.innerText = "Network changed to: " + chainId;
+            if (chainId == "0xAA36A7") { // Sepolia Chain ID
+                getNextTokenId();
+            } 
+            window.location.reload();
+        });
+
+
+        function disconnectMetamask() {
+            walletAddressElement.innerText = "";
+            statusElement.innerText = "Status: Not Connected";
+            connectButton.innerText = "Connect MetaMask";
+            isConnected = false; 
+        }
+
+  
+        connectButton.addEventListener("click", () => {
+            if (isConnected) {
+                disconnectMetamask();
+            } else {
+                connectMetamask();
+            }
+        });
+
+
+        async function mintFunction() {
+    if (!isConnected) {
+        statusMint.innerText = "Firstly, connect with your MetaMask Wallet";
+        return;
+    }
+
+    try {
+        mintButton.disabled = true;
+        loadSpin.style.display = 'inline-block';
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        const walletAddress = accounts[0];
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+        const signer = provider.getSigner();
+
+        const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        const tokenURI = "ipfs://bafkreie72o6tq2katmqcvo6h3c4wgumoow2yjxakyl7qwwevfmikalr5wy"; // IPFS'deki metadata bağlantınız
+        const secret = "monadpassword123";
+
+
+        const tx = await contract.mint(walletAddress, tokenURI, secret);
+
+
+        statusMint.innerText = "Transaction sent. Waiting for confirmation...";
+        await tx.wait();
+        statusMint.innerText = "Mint successful! Transaction Hash: " + tx.hash;
+        mintButton.disabled = false;
+        loadSpin.style.display = 'none';
+    } catch (error) {
+        console.error("Error during minting:", error);
+        statusMint.innerText = "Mint failed: " + error.message;
+        mintButton.disabled = false;
+        loadSpin.style.display = 'none';
+    }
+}
+
+    async function getNextTokenId() {
+        try {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+            const contract = new ethers.Contract(contractAddress, contractABI, provider);
+
+            const nextTokenId = await contract.nextTokenId();
+            const remainingTokens = 10001 - parseInt(nextTokenId.toString());
+        document.getElementById("remainText").innerText = remainingTokens + " / 10000";
+        loadSpinRemined.style.display = 'none';
+            return nextTokenId;
+        } catch (error) {
+            console.error("Error reading nextTokenId:", error);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+            getNextTokenId();
+        });
+
+    
+  </script>

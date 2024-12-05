@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #000000 !important;
+    position: relative;
+  }
+  
+  model-viewer {
+    z-index: 10;
+    position: relative;
+  }
+  
+  
+.bg-purple {
+    background-color: #2E073F !important;
+}
+.bg-black {
+    background-color: #000000;
+}
+.bg-blue {
+    background-color: #17153B;
+}
+
+.bg-light-blue {
+    background-color: #D4EBF8;
+}
+
+.text-white {
+    color:white
+}
+
+.text-black {
+    color:black
+}
+
+.text-28 {
+    font-size: 28px;
+}
+
+.text-16 {
+    font-size: 16px;
+}
+
+.text-20 {
+    font-size: 20px;
+}
+
+.font-park {
+    font-family: "Inter", sans-serif;
+}
+
+.weight-500 {
+    font-weight: 500;
+}
+
+.weight-700 {
+    font-weight: 700;
+}
+
+.table-auto-bg {
+    background-color: inherit !important; 
+  }
+
+  .scrollable-list {
+    max-height: 200px; /* Maksimum yüksekliği ayarla */
+    overflow-y: auto; /* Dikey kaydırma etkinleştir */
+  }
+
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+    word-wrap: break-word; /* Uzun kelimeleri böl */
+    overflow-wrap: break-word; /* Taşmayı engelle */
+}
