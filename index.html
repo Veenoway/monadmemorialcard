@@ -154,7 +154,7 @@ console.log(typeof ethers);
 
 
         async function connectMetamask() {
-            if (typeof window.ethereum !== "undefined") {
+            if (typeof window.ethereum !== 'undefined') {
                 try {
                   
                     const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -172,8 +172,6 @@ console.log(typeof ethers);
                 alert("MetaMask is not installed. Please install it to connect.");
             }
         }
-
-        
         window.ethereum.on("accountsChanged", (accounts) => {
             if (accounts.length === 0) {
                 walletAddressElement.innerText = "Please connect to MetaMask.";
@@ -241,8 +239,12 @@ console.log(typeof ethers);
         mintButton.disabled = false;
         loadSpin.style.display = 'none';
     } catch (error) {
-        console.error("Error during minting:", error);
-        statusMint.innerText = "Mint failed: " + error.message;
+        console.log("Error during minting:", error);
+        if(error.code.includes('ACTION_REJECTED')) {
+            statusMint.innerText = "User Rejected"
+        } else {
+            statusMint.innerText = "Mint failed: " + error.message;
+        }
         mintButton.disabled = false;
         loadSpin.style.display = 'none';
     }
