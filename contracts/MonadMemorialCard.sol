@@ -9,10 +9,14 @@ contract MemorialCardCollection is ERC721URIStorage {
     bytes32 private secretHash; 
     uint256 public constant MAX_SUPPLY = 10001;
 
+    error InvalidSecret();
+    error AlreadyMinted();
+    error MaxSupplyReached();
+
     mapping(address => bool) public hasMinted;
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Only the owner can perform this action");
+        if (msg.sender != owner) revert("Not owner");
         _;
     }
 
@@ -23,9 +27,11 @@ contract MemorialCardCollection is ERC721URIStorage {
     }
 
     function mint(address recipient, string memory tokenURI, string memory providedSecret) public {
-        require(keccak256(abi.encodePacked(providedSecret)) == secretHash, "Invalid secret");
-        require(!hasMinted[recipient], "This address has already minted a token");
-        require(nextTokenId <= MAX_SUPPLY, "Maximum supply of 10,000 tokens reached");
+        // Handle errors
+        if (keccak256(abi.encodePacked(providedSecret)) != secretHash) revert InvalidSecret();
+        if (hasMinted[recipient]) revert AlreadyMinted();
+        if (nextTokenId > MAX_SUPPLY) revert MaxSupplyReached();
+        
         uint256 tokenId = nextTokenId;
         nextTokenId++;
         _mint(recipient, tokenId);
